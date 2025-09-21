@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 m-0">Todos los posts</h1>
+        <a href="/posts/new" class="btn btn-primary">Nuevo</a>
+    </div>
+
+    <% if (posts.length === 0) { %>
+        <div class="alert alert-info">Aún no hay posts.</div>
+    <% } else { %>
+        <div class="list-group">
+            <% posts.forEach(p => { %>
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-1"><a href="/posts/<%= p.id %>"><%= p.title %></a></h5>
+                            <small class="text-muted"><%= new Date(p.created_at).toLocaleString() %></small>
+                        </div>
+                        <div class="ms-3">
+                            <a href="/posts/<%= p.id %>" class="btn btn-sm btn-outline-secondary">Ver</a>
+                            <a href="/posts/edit/<%= p.id %>" class="btn btn-sm btn-warning">Editar</a>
+                            <form action="/posts/delete/<%= p.id %>" method="POST" class="d-inline" onsubmit="return confirm('¿Eliminar este post?');">
+                                <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                    <p class="mb-1 mt-2"><%= p.body.length > 200 ? p.body.slice(0,200) + '…' : p.body %></p>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+
+<%- include('partials/footer') %>

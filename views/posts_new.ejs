@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="container">
+    <h1 class="h3 mb-3">Crear post</h1>
+
+    <form action="/posts" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" name="title" class="form-control" required maxlength="255">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Cuerpo</label>
+            <textarea name="body" class="form-control" rows="8" required></textarea>
+        </div>
+        <button class="btn btn-primary">Guardar</button>
+        <a href="/" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<%- include('partials/footer') %>
